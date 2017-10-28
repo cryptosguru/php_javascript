@@ -7249,7 +7249,7 @@ PHP.Modules.prototype.var_export = function( variable, ret ) {
                         return undefined;
             
                     } else {
-                        result = result.replace(/\n/g,"\\n").replace(/\r/g,"");
+                        result = result.replace(/\r/g,"");
                     }
 
                     /*
