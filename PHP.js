@@ -7199,9 +7199,9 @@ PHP.Modules.prototype.var_export = function( variable, ret ) {
                     
                             var re;
                             if ( curlyOpen > 0) {
-                                re = /^([^\\\$"{}\]]|\\.)+/g;
+                                re = /^([^\\\$"{}\]\)\->]|\\.)+/g;
                             } else {
-                                re = /^([^\\\$"{]|\\.|{[^\$])+/g;
+                                re = /^([^\\\$"{]|\\.|{[^\$]|\$(?=[^a-zA-Z_\x7f-\uffff]))+/g;
                             }
 
                             while(( match = result.match( re )) !== null ) {
@@ -7214,7 +7214,7 @@ PHP.Modules.prototype.var_export = function( variable, ret ) {
 
 
                                 results.push([
-                                    parseInt(( curlyOpen > 0 ) ? PHP.Constants.T_CONSTANT_ENCAPSED_STRING : PHP.Constants.T_ENCAPSED_AND_WHITESPACE, 10),
+                                    parseInt(( curlyOpen > 0 ) ? PHP.Constants.T_STRING : PHP.Constants.T_ENCAPSED_AND_WHITESPACE, 10),
                                     match[ 0 ].replace(/\n/g,"\\n").replace(/\r/g,""),
                                     line
                                     ]);
@@ -7223,6 +7223,15 @@ PHP.Modules.prototype.var_export = function( variable, ret ) {
 
                                 result = result.substring( match[ 0 ].length );
 
+                            }
+
+                            if( curlyOpen > 0 && result.match(/^\->/) !== null ) {
+                                results.push([
+                                    parseInt(PHP.Constants.T_OBJECT_OPERATOR, 10),
+                                    '->',
+                                    line
+                                    ]);
+                                result = result.substring( 2 );
                             }
 
                             if( result.match(/^{\$/) !== null ) {
