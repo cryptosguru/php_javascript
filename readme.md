@@ -35,7 +35,3 @@ PHP Files and tests under The PHP License, version 3.01
 ## Credits ##
  - Test cases from <a href="https://github.com/php/php-src/">php-src</a> -  The PHP License, version 3.01
  - Grammar parser adapted from <a href="https://github.com/nikic/PHP-Parser">PHP-Parser</a> - by Nikita Popov
-
-## Questions & Comments ##
-
-If you encounter a bug, please feel free to post it on GitHub. For questions or comments, you can contact me at Twitter <a href="https://twitter.com/niklasvh">@niklasvh</a> or <a href="https://plus.google.com/115030581977322198102/posts">Google Plus</a>
